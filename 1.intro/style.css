@@ -1,0 +1,9 @@
+h1 {
+    color: red;
+}
+.purpleWay {
+    background-color: purple;
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: white;
+}

@@ -1,0 +1,50 @@
+@import 'reset-css';
+
+body {
+    overflow: hidden;
+}
+
+#cat {
+    width: 399px;
+    height: calc(2393px / 12);
+    background-image: url("/cat.png");
+    animation: walk steps(12) infinite 1s, walkRight linear infinite 10s;
+    transform: scaleX(-1);
+    position: absolute;
+    bottom: -18px;
+}
+
+@keyframes walkRight {
+    from{
+        left: -399px;
+    }
+    to{
+        left: 100vw;
+    }
+}
+
+@keyframes walk {
+    from{
+        background-position-y: 0;
+    }
+    to{
+        background-position-y: -2393px;
+    }
+}
+
+#grant {
+    width: calc(1024px / 16);
+    height: calc(640px / 10);
+    background-image: url("/pokemon.webp");
+    animation: showIt 5s steps(16) infinite;
+}
+
+@keyframes showIt {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -1024px;
+    }   
+}
+

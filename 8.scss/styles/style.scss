@@ -1,0 +1,26 @@
+$primary: blueviolet;
+$secondary: tomato;
+
+body {
+    background-color: $primary;
+}
+
+
+
+main {
+    width: 80%;
+    margin: 0 auto;
+    h1 {
+        background-color: $secondary;
+    }
+    ul {
+        background-color: gray;
+        padding: 2rem;
+        li {
+            color: $primary;
+            &.special {
+                text-transform: uppercase;
+            }
+        }
+    }
+}

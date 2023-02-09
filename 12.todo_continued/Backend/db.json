@@ -1,0 +1,14 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "todo": "Touch grass",
+      "checked": false
+    },
+    {
+      "todo": "TESTing",
+      "checked": false,
+      "id": "_C66D4P"
+    }
+  ]
+}

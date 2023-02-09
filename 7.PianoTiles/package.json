@@ -1,0 +1,25 @@
+{
+  "name": "7.pianotiles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "predeploy": "npm run build",
+    "deploy": "surge ./dist fe-test-syntra.surge.sh",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "randomcolor": "^0.6.2",
+    "reset-css": "^5.0.1"
+  },
+  "devDependencies": {
+    "sass": "^1.57.1"
+  }
+}

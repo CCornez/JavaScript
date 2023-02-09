@@ -1,0 +1,128 @@
+@use './base/reset' as *;
+@use './base/fonts' as *;
+@use './base/mixins' as *;
+@use './base/variables' as *;
+
+body {
+    background-color: $bg;
+    font-family: $primary-font;
+}
+
+.todoapp {
+    max-width: 572px;
+    margin: 0 auto;
+    padding-top: 28px;
+    &__form {
+        width: 95%;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 19px;
+        background-color: $green;
+        position: relative;
+        box-shadow: 0px 5px 5px $grey;
+        &__input {
+            width: calc(100% - 33px);
+            height: 66px;
+            border: none;
+            border-radius: 5px;
+            padding-right: calc(33px + 25px);
+            padding-left: 25px;
+            font-size: 1.25rem;
+            outline: none;
+            color: $white;
+            background-color: $greenLight;
+            transition: all 400ms;
+            &::placeholder {
+                color: $white;
+                opacity: 0.8;
+            }
+            &--error {
+                background-color: $red;
+            }
+        }
+        &__button {
+            position: absolute;
+            right: 19px;
+            width: 66px;
+            height: 66px;
+            border: 1px solid $green;
+            border-radius: 50%;
+            color: $green;
+            font-size: 2rem;
+        }
+    }
+    &__list {
+        margin: 19px 35px;
+        padding: 0;
+        font-size: 1.125rem;
+        &__item {
+            display: flex;
+            margin-bottom: 19px;
+            border-radius: 5px;
+            padding: 25px;
+            gap: 20px;
+            background-color: $white;
+            box-shadow: 0 2px 3px $grey;
+            align-items: center;
+            position: relative;
+            .text {
+                margin-right: auto;
+                // text-align: center;
+                align-items: center;
+            }
+            .delete, .check {
+                display: flex;
+                height: 25px;
+                width: 25px;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                padding: 0;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+            .delete {
+                color: $grey;
+                font-size: 2rem;
+                transition: all 400ms;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 1px;
+                    height: 50%;
+                    right: 60px;
+                    background-color: $grey;
+
+                }
+                &:hover{
+                    color: $red;
+                }
+            }
+            .check {
+                color: $green;
+                border: 1px solid $green;
+                border-radius: 50%;
+                &:hover {
+                    background-color: $green;
+                    color: $white;
+                }
+            }
+            &--checked {
+                .text {
+                    text-decoration: line-through;
+                    text-decoration-color: $green;
+                    text-decoration-thickness: 2px;
+                }
+                .check {
+                    background-color: $green;
+                    color: $white;
+                    &:hover {
+                        background-color: $white;
+                        color: $green;
+                    }
+                }
+            }
+        }
+    }
+}

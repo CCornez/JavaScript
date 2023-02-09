@@ -1,0 +1,52 @@
+@import url(./reset.css);
+
+body {
+    background-color: black;
+    height: 100vh;
+    overflow: hidden;
+    cursor: none;
+}
+.crosshair {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    margin-left: -30px;
+    margin-top: -30px;
+    background-image: url(/images/crosshair.png);
+}
+.crosshair:active {
+    animation-name: shoot;
+    animation-duration: 100ms;
+    animation-iteration-count: 1;
+}
+@keyframes shoot {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.crosshair::after {
+    content: '';    
+    position: absolute;
+    top: 50%;
+    left: -100vw;
+    width: calc(200vw + 30px);
+    height: 1px;
+    background-image: repeating-linear-gradient(90deg, rgba(0, 255, 0, 0.8) 0px 2px , black 2px 6px)
+}
+.crosshair::before {
+    content: '';    
+    position: absolute;
+    top: -100vh;
+    left: 50%;
+    width: 1px;
+    height: calc(200vh + 30px);
+    background-image: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.8) 0px 2px , black 2px 6px)
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/index.js" type="module" defer></script>
+  </head>
+  <body>
+    <main class="todoapp">
+      <form class="todoapp__form" action="">
+        <input
+          spellcheck="false"
+          class="todoapp__form__input todoapp__form__input--error"
+          type="text"
+          placeholder="Enter an activity.."
+        />
+        <button class="todoapp__form__button">+</button>
+      </form>
+      <ul class="todoapp__list">
+        <li class="todoapp__list__item">
+          <span class="text">Grocery shopping</span>
+          <button class="delete">
+            <svg class="icon icon-delete">
+              <use href="icons.svg#icon-delete"></use>
+            </svg>
+          </button>
+          <button class="check">
+            <svg class="icon icon-check">
+              <use href="icons.svg#icon-check"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="todoapp__list__item todoapp__list__item--checked">
+          <span class="text">Cook spaghetti bolognese</span>
+          <button class="delete">
+            <svg class="icon icon-delete">
+              <use href="icons.svg#icon-delete"></use>
+            </svg>
+          </button>
+          <button class="check">
+            <svg class="icon icon-check">
+              <use href="icons.svg#icon-check"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="todoapp__list__item">
+          <span class="text">Help Alex with his homework</span>
+          <button class="delete">
+            <svg class="icon icon-delete">
+              <use href="icons.svg#icon-delete"></use>
+            </svg>
+          </button>
+          <button class="check">
+            <svg class="icon icon-check">
+              <use href="icons.svg#icon-check"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="todoapp__list__item todoapp__list__item--checked">
+          <span class="text">Clean the car</span>
+          <button class="delete">
+            <svg class="icon icon-delete">
+              <use href="icons.svg#icon-delete"></use>
+            </svg>
+          </button>
+          <button class="check">
+            <svg class="icon icon-check">
+              <use href="icons.svg#icon-check"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="todoapp__list__item">
+          <span class="text"
+            >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe
+            laboriosam, repellendus magni quae, ab veniam quo dolore cumque,
+            beatae esse minus in architecto?</span
+          >
+          <button class="delete">
+            <svg class="icon icon-delete">
+              <use href="icons.svg#icon-delete"></use>
+            </svg>
+          </button>
+          <button class="check">
+            <svg class="icon icon-check">
+              <use href="icons.svg#icon-check"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>
