@@ -1,0 +1,11 @@
+@import url('./reset.css');
+
+body {
+    height: 100vh;
+}
+div {
+    cursor: pointer;
+    transition-property: top, background-color, height; 
+    transition-duration: 2000ms;
+    transition-timing-function: cubic-bezier(.39,1.79,.42,-0.56), ease-in;
+}

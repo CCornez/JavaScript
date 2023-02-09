@@ -1,0 +1,24 @@
+WAAROM MODULE BUNDLER???
+css
+	-> gebundeld worden tot A file
+	-> sass ondersteuning
+	-> alles opkuisen (geen witruimtes/geen commentaren)
+	-> geprefixed wordt op basis van mijn browserinstelling
+js
+	-> minified
+	-> gebundeld
+	-> converteren naar oude javascript (hangt af van browserinstelling)
+server
+	-> maakt automatisch een webserver
+	-> ondersteund HMR (Hot module reloading)
+HOE MEE WERKEN???
+hoofdmap
+	css
+		style.css @import url("./reset.css");
+		reset.css
+	js
+		index.js	(import module from "module.js")
+		module.js (export default ...)
+	index.html => <script type="module" src="./js/index.js"></script>
+	npm init -y => scripts toevoegen
+	==> npm start <==

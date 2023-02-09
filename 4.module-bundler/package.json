@@ -1,0 +1,19 @@
+{
+  "name": "4.module-bundler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "deploy": "surge ./dist fe-cc-test.surge.sh",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "randomcolor": "^0.6.2"
+  }
+}
