@@ -1,0 +1,22 @@
+@use "./base/reset";
+@use "./base/mixins" as *;
+@use "./base/fonts";
+@use "./base/variables" as *;
+
+body {
+  background-color: $bg;
+  font-family: $primary-font;
+}
+
+main {
+  width: 90%;
+  margin: 0 auto;
+  form {
+    display: flex;
+    justify-content: center;
+  }
+  h1 {
+    margin-top: 50px;
+    text-align: center;
+  }
+}
