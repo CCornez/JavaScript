@@ -10,4 +10,10 @@ function sortArrayOfObject(arr, value) {
   });
 }
 
-export { sortArrayOfObject };
+function getTime(date) {
+  date = new Date(date * 1000).toLocaleString('fr-BE');
+  const time = date.substring(11, 16);
+  return time;
+}
+
+export { sortArrayOfObject, getTime };

@@ -19,4 +19,43 @@ main {
     margin-top: 50px;
     text-align: center;
   }
+  #results {
+    .connection {
+      width: 30%;
+      min-width: 500px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      background-color: #d0f2ff;
+      padding: 10px;
+      &:hover {
+        background-color: #ade8ff;
+      }
+      p, li {
+        position: relative;
+        span{
+          position: absolute;
+          right: 0;
+        }
+      }
+      > p {
+        &:first-child{
+          margin-bottom: 5px;
+        }
+        &:nth-child(2) {
+          font-size: 14px;
+        }
+      }
+      ul li {
+        p:nth-of-type(2),
+        ul li{
+          padding-left: 7px;
+          font-size: 14px;
+        }
+        p:nth-of-type(2) {
+          padding-left: 47px;
+          color: #6e6e6e;
+        }
+      } 
+    }
+  }
 }
