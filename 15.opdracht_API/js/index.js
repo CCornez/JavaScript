@@ -28,8 +28,10 @@ async function getConnections(from, to) {
     // after "to" -> "&date=090223&time=1230"
     `/connections/?from=${from}&to=${to}&format=json&lang=en`
   );
-  const connectionTemplate = document.querySelector('#connection');
-  const connectionsHTML = connections
+  const summaryTemplate = document.querySelector('#summary');
+  const detailTemplate = document.querySelector('#detail');
+
+  const connectionsObj = connections
     .map(
       (
         {
@@ -143,7 +145,7 @@ async function getConnections(from, to) {
         }
 
         // insert connection information into the template
-        return connectionTemplate.innerHTML
+        const connectionSummary = summaryTemplate.innerHTML
           .replace('%ID%', i)
           .replace('%NUMBER_VIAS%', viasNumber)
           .replace('%DURATION%', durationFormat)
@@ -156,12 +158,47 @@ async function getConnections(from, to) {
           .replaceAll('%ARRIVAL_TIME%', arrivalTime)
           .replace('%ARRIVAL_STATION%', arrivalStation)
           .replace('%ARRIVAL_PLATFORM%', arrivalPlatform);
+
+        // insert connection information into the template
+        const connectionDetail = detailTemplate.innerHTML
+          .replace('%ID%', i)
+          .replace('%NUMBER_VIAS%', viasNumber)
+          .replace('%DURATION%', durationFormat)
+          .replaceAll('%DEPARTURE_TIME%', departureTime)
+          .replace('%DEPARTURE_STATION%', departureStation)
+          .replace('%DEPARTURE_PLATFORM%', departurePlatform)
+          .replace('%DIRECTION%', direction.name)
+          .replace('%STOPS%', stopsHTML)
+          .replace('%VIAS%', viasHTML)
+          .replaceAll('%ARRIVAL_TIME%', arrivalTime)
+          .replace('%ARRIVAL_STATION%', arrivalStation)
+          .replace('%ARRIVAL_PLATFORM%', arrivalPlatform);
+
+        return { connectionSummary, connectionDetail };
       }
     )
-    .join('');
+    .reduce(
+      ({ summaries, details }, { connectionSummary, connectionDetail }) => {
+        summaries += connectionSummary;
+        details += connectionDetail;
+        return { summaries, details };
+      },
+      { summaries: '', details: '' }
+    );
 
-  const results = document.querySelector('#results');
-  results.innerHTML = connectionsHTML;
+  const { summaries, details } = connectionsObj;
+
+  // insert connections summaries into html
+  const connectionsSummariesHTML = document.querySelector(
+    '#connections__summaries'
+  );
+  connectionsSummariesHTML.innerHTML = summaries;
+
+  // insert connections details into html
+  const connectionsDetailsHTML = document.querySelector(
+    '#connections__details'
+  );
+  connectionsDetailsHTML.innerHTML = details;
 
   console.log(connections);
 }
@@ -175,3 +212,12 @@ searchForm.addEventListener('submit', (e) => {
   const to = document.querySelector('#stationTo').value;
   getConnections(from, to);
 });
+
+document
+  .querySelector('#connections__summaries')
+  .addEventListener('click', (e) => {
+    const summary = e.target.closest('.summary');
+    if (summary) {
+      console.log(summary.dataset.id);
+    }
+  });

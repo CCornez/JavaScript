@@ -17,29 +17,35 @@
         <button>search</button>
       </form>
       <h1>result</h1>
-      <div id="results"></div>
+      <div id="connections">
+        <div id="connections__summaries"></div>
+        <div id="connections__details"></div>
+      </div>
     </main>
 
-    <template id="connection">
-      <div class="connection" data-id="%ID%">
+    <template id="summary">
+      <div class="summary" data-id="%ID%">
         <p>%DEPARTURE_TIME%<span>%ARRIVAL_TIME%</span></p>
         <p>Changes: %NUMBER_VIAS%<span>%DURATION%</span></p>
-        <ul class="connection__detail">
-          <li>
-            <p>
-              %DEPARTURE_TIME% %DEPARTURE_STATION%
-              <span>Platform: %DEPARTURE_PLATFORM%</span>
-            </p>
-            <p>%DIRECTION%</p>
-            %STOPS%
-          </li>
-          %VIAS%
-          <li>
-            %ARRIVAL_TIME% %ARRIVAL_STATION%
-            <span>Platform: %ARRIVAL_PLATFORM%</span>
-          </li>
-        </ul>
       </div>
+    </template>
+
+    <template id="detail">
+      <ul class="detail hidden" data-id="%ID%">
+        <li>
+          <p>
+            %DEPARTURE_TIME% %DEPARTURE_STATION%
+            <span>Platform: %DEPARTURE_PLATFORM%</span>
+          </p>
+          <p>%DIRECTION%</p>
+          %STOPS%
+        </li>
+        %VIAS%
+        <li>
+          %ARRIVAL_TIME% %ARRIVAL_STATION%
+          <span>Platform: %ARRIVAL_PLATFORM%</span>
+        </li>
+      </ul>
     </template>
 
     <template id="via">
