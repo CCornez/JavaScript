@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "vite --open --host"
+    "start": "vite --host --open",
+    "prepreview": "npm run build",
+    "preview": "vite preview --host --open",
+    "prebuild": "rm -rf ./dist",
+    "build": "vite build --base ./",
+    "deploy": "surge ./dist fe-cc-api.surge.sh",
+    "clean": "rm -rf ./dist ./node_modules"
   },
   "keywords": [],
   "author": "",
