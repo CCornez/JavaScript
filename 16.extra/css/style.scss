@@ -1,0 +1,57 @@
+@use "./base/reset";
+@use "./base/fonts";
+@use "./base/variables" as *;
+@use "./base/mixins" as *;
+
+body {
+  font-family: $primary-font;
+  display: grid;
+  height: 100vh;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 70px auto 35px;
+  grid-template-areas: 
+  "header header header header header"
+  "section section section section aside"
+  "footer footer footer footer footer";
+}
+
+header {
+  background-color: yellow;
+  grid-area: header;
+  @extend %flexCenter;
+  h1 {
+    font-size: 1.7rem;
+    text-transform: uppercase;
+  }
+}
+section {
+  background-color: tomato;
+  grid-area: section;
+  height: 200vh;
+}
+aside {
+  background-color: green;
+  grid-area: aside;
+}
+footer {
+  background-color: blue;
+  grid-area: footer;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "section"
+    "footer";
+    overflow-x: hidden;
+  }
+  aside {
+    position: absolute;
+    right: -75vw;
+    width: 75vw;
+    top: 70px;
+    min-height: calc(100vh - 100px);
+  }
+}
