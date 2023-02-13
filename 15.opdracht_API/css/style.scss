@@ -68,9 +68,14 @@ main {
         }
       }
     }
+    &__details .detail p {
+      position: initial;
+    }
   }
 }
 
 .hidden {
   display: none;
 }
+
+#map { height: 500px; }

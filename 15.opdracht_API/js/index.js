@@ -40,6 +40,9 @@ renderStations();
  * Connections
  */
 
+// initialize latitudes and longitudes for the map
+let latLongs = [];
+
 // Api call -> get connections with 2 parameters: from (station) and to (station)
 async function getConnections(from, to) {
   try {
@@ -68,6 +71,8 @@ function renderConnections(connections) {
             platform: departurePlatform,
             time: departureDate,
             stops,
+            // for map
+            stationinfo: { locationX: departureLong, locationY: depatureLat },
           },
           duration,
           vias,
@@ -75,11 +80,19 @@ function renderConnections(connections) {
             station: arrivalStation,
             platform: arrivalPlatform,
             time: arrivalDate,
+            // for map
+            stationinfo: { locationX: arrivalLong, locationY: arrivalLat },
           },
         },
         // index
         i
       ) => {
+        // MAP DEPARTURE
+
+        let latLong = [];
+
+        latLong.push([+depatureLat, +departureLong]);
+
         // DURATION
         const durationHours = Math.floor(duration / 3600);
         const durationMinutes = Math.floor(
@@ -99,9 +112,19 @@ function renderConnections(connections) {
         // if there are stops, create html to insert later (could use a template)
         if (stops) {
           stopsHTML = `<ul>${stops.stop
-            .map(({ station, scheduledArrivalTime }) => {
-              return `<li>${getTime(scheduledArrivalTime)} ${station}</li>`;
-            })
+            .map(
+              ({
+                station,
+                scheduledArrivalTime,
+                // for map
+                stationinfo: { locationX: stopLong, locationY: stopLat },
+              }) => {
+                //add stops to map
+                latLong.push([+stopLat, +stopLong]);
+
+                return `<li>${getTime(scheduledArrivalTime)} ${station}</li>`;
+              }
+            )
             .join('')}</ul>`;
         }
 
@@ -124,6 +147,11 @@ function renderConnections(connections) {
                 // destructure the vias object
                 {
                   station,
+                  // for map
+                  stationinfo: {
+                    locationX: departureLong,
+                    locationY: depatureLat,
+                  },
                   departure: {
                     direction,
                     platform: departurePlatform,
@@ -134,6 +162,10 @@ function renderConnections(connections) {
                 },
                 i
               ) => {
+                // MAP DEPARTURE
+
+                latLong.push([+depatureLat, +departureLong]);
+
                 // DEPARTURE TIME
                 // get hours and minutes form a unix timestamp format (hh:mm)
                 const departureTime = getTime(departureDate);
@@ -144,11 +176,23 @@ function renderConnections(connections) {
                 // if there are stops, create html to insert later (could use a template)
                 if (stops) {
                   stopsHTML = `<ul>${stops.stop
-                    .map(({ station, scheduledArrivalTime }) => {
-                      return `<li>${getTime(
-                        scheduledArrivalTime
-                      )} ${station}</li>`;
-                    })
+                    .map(
+                      ({
+                        station,
+                        scheduledArrivalTime, // for map
+                        stationinfo: {
+                          locationX: stopLong,
+                          locationY: stopLat,
+                        },
+                      }) => {
+                        //add stops to map
+                        latLong.push([+stopLat, +stopLong]);
+
+                        return `<li>${getTime(
+                          scheduledArrivalTime
+                        )} ${station}</li>`;
+                      }
+                    )
                     .join('')}</ul>`;
                 }
 
@@ -173,6 +217,12 @@ function renderConnections(connections) {
             .join('');
           // --- This code is very similar the the code below ⤴ ---
         }
+
+        // MAP ARRIVAL
+
+        latLong.push([+arrivalLat, +arrivalLong]);
+
+        latLongs.push(latLong);
 
         // insert connection summary into the template
         const connectionSummary = document
@@ -222,6 +272,7 @@ function renderConnections(connections) {
   // insert connections details into html
   document.querySelector('#connections__details').innerHTML = details;
 
+  console.log(latLongs);
   console.log(connections);
 }
 
@@ -270,5 +321,40 @@ document
 
       // unhide the filtered detail
       detail.classList.remove('hidden');
+      getMap(summary.dataset.id);
     }
   });
+
+/******************** MAP ********************/
+
+let map = '';
+
+function getMap(id) {
+  if (map) {
+    map.remove();
+  }
+  map = L.map('map', {
+    center: [50.826, 4.3802],
+    zoom: 12,
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
+  // add stops as markers
+
+  latLongs[id].forEach((latLong) => L.marker(latLong).addTo(map));
+
+  // create a line between the markers
+  let polyline = L.polyline(latLongs[id], {
+    color: 'blue',
+  }).addTo(map);
+
+  // L.marker().remove();
+
+  // zoom the map to the polyline
+  map.fitBounds(polyline.getBounds());
+}
