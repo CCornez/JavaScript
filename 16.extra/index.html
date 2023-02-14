@@ -9,8 +9,42 @@
   </head>
   <body>
     <header><h1>cocktails 4 life</h1></header>
-    <section></section>
+    <section>
+      <form action="">
+        <label for="searchfield">Search</label>
+        <input type="text" id="searchfield" />
+        <button>
+          <svg class="icon">
+            <use href="./icons/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+      <ul class="cocktailGrid"></ul>
+    </section>
     <aside></aside>
     <footer></footer>
+
+    <!-- templates -->
+
+    <template id="cocktailCard">
+      <li
+        class="cocktailCard"
+        data-id="%ID%"
+        data-name="%COCKTAIL%"
+        data-img="%IMG%"
+      >
+        <div class="imgHolder">
+          <img src="%IMG%" alt="%COCKTAIL%" />
+        </div>
+        <div class="info">
+          <p>%COCKTAIL%</p>
+          <button class="likeBtn">
+            <svg class="icon">
+              <use href="./icons/icons.svg#icon-heart-%STATUS%" />
+            </svg>
+          </button>
+        </div>
+      </li>
+    </template>
   </body>
 </html>
