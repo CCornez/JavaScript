@@ -93,6 +93,7 @@ main {
     &__summaries {
       width: 30%;
       min-width: 500px;
+      cursor: pointer;
       .summary {
         background-color: #d0f2ff;
         &:hover {
