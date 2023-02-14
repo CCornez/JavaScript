@@ -55,7 +55,7 @@ main {
     display: flex;
     justify-content: space-between;
     &__summaries, &__details {
-      width: 50%;
+      width: 65%;
       .summary, .detail {
         margin-bottom: 20px;
         border-radius: 5px;
@@ -92,7 +92,7 @@ main {
     }
     &__summaries {
       width: 30%;
-      min-width: 500px;
+      // min-width: 500px;
       cursor: pointer;
       .summary {
         background-color: #d0f2ff;
@@ -116,10 +116,20 @@ main {
 }
 
 @media screen and (max-width: 850px) {
-  main form .selects {
-    flex-direction: column;
-    p {
-      transform: rotateZ(90deg);
+  main {
+    width: 100%;
+    form .selects {
+      flex-direction: column;
+      p {
+        transform: rotateZ(90deg);
+      }
+    }
+    #connections {
+      flex-direction: column;
+      &__summaries, &__details {
+        width: 90%;
+        margin: 0 auto;
+      }
     }
   }
 }
