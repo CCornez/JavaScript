@@ -164,8 +164,7 @@ function renderConnections(connections) {
                     stops,
                   },
                   arrival: { platform: arrivalPlatform, time: arrivalDate },
-                },
-                i
+                }
               ) => {
                 // MAP DEPARTURE
 
