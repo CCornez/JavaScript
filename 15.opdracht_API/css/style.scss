@@ -47,13 +47,15 @@ main {
   }
   h1 {
     margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
     text-align: center;
   }
   #connections {
     display: flex;
     justify-content: space-between;
     &__summaries, &__details {
-      width: 65%;
+      width: 50%;
       .summary, .detail {
         margin-bottom: 20px;
         border-radius: 5px;
@@ -108,7 +110,9 @@ main {
   display: none;
 }
 
-#map { height: 500px; }
+#map { 
+  height: 500px;
+}
 
 @media screen and (max-width: 850px) {
   main form .selects {

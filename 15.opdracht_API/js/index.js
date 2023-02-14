@@ -278,8 +278,8 @@ function renderConnections(connections) {
   // insert connections details into html
   document.querySelector('#connections__details').innerHTML = details;
 
-  console.log(mapInfo);
-  console.log(connections);
+  // console.log(mapInfo);
+  // console.log(connections);
 }
 
 /******************** EVENTS ********************/
