@@ -40,8 +40,10 @@ renderStations();
  * Connections
  */
 
-// initialize latitudes and longitudes for the map
-let latLongs = [];
+// initialize map info:
+// station names,
+// latitudes and longitudes for the map
+let mapInfo = [];
 
 // Api call -> get connections with 2 parameters: from (station) and to (station)
 async function getConnections(from, to) {
@@ -72,7 +74,7 @@ function renderConnections(connections) {
             time: departureDate,
             stops,
             // for map
-            stationinfo: { locationX: departureLong, locationY: depatureLat },
+            stationinfo: { locationX: departureLong, locationY: departureLat },
           },
           duration,
           vias,
@@ -88,10 +90,11 @@ function renderConnections(connections) {
         i
       ) => {
         // MAP DEPARTURE
+        let stationNames = [];
+        let latLongs = [];
 
-        let latLong = [];
-
-        latLong.push([+depatureLat, +departureLong]);
+        stationNames.push(departureStation);
+        latLongs.push([+departureLat, +departureLong]);
 
         // DURATION
         const durationHours = Math.floor(duration / 3600);
@@ -120,7 +123,8 @@ function renderConnections(connections) {
                 stationinfo: { locationX: stopLong, locationY: stopLat },
               }) => {
                 //add stops to map
-                latLong.push([+stopLat, +stopLong]);
+                stationNames.push(station);
+                latLongs.push([+stopLat, +stopLong]);
 
                 return `<li>${getTime(scheduledArrivalTime)} ${station}</li>`;
               }
@@ -150,7 +154,7 @@ function renderConnections(connections) {
                   // for map
                   stationinfo: {
                     locationX: departureLong,
-                    locationY: depatureLat,
+                    locationY: departureLat,
                   },
                   departure: {
                     direction,
@@ -164,7 +168,8 @@ function renderConnections(connections) {
               ) => {
                 // MAP DEPARTURE
 
-                latLong.push([+depatureLat, +departureLong]);
+                stationNames.push(station);
+                latLongs.push([+departureLat, +departureLong]);
 
                 // DEPARTURE TIME
                 // get hours and minutes form a unix timestamp format (hh:mm)
@@ -186,7 +191,8 @@ function renderConnections(connections) {
                         },
                       }) => {
                         //add stops to map
-                        latLong.push([+stopLat, +stopLong]);
+                        stationNames.push(station);
+                        latLongs.push([+stopLat, +stopLong]);
 
                         return `<li>${getTime(
                           scheduledArrivalTime
@@ -219,10 +225,10 @@ function renderConnections(connections) {
         }
 
         // MAP ARRIVAL
+        stationNames.push(arrivalStation);
+        latLongs.push([+arrivalLat, +arrivalLong]);
 
-        latLong.push([+arrivalLat, +arrivalLong]);
-
-        latLongs.push(latLong);
+        mapInfo.push({ stationNames, latLongs });
 
         // insert connection summary into the template
         const connectionSummary = document
@@ -272,7 +278,7 @@ function renderConnections(connections) {
   // insert connections details into html
   document.querySelector('#connections__details').innerHTML = details;
 
-  console.log(latLongs);
+  console.log(mapInfo);
   console.log(connections);
 }
 
@@ -331,13 +337,17 @@ let map = '';
 
 function getMap(id) {
   if (map) {
+    // remove previous map with markers and polyline
     map.remove();
   }
+
+  // set map
   map = L.map('map', {
     center: [50.826, 4.3802],
     zoom: 12,
   });
 
+  // add map layer
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution:
@@ -345,15 +355,16 @@ function getMap(id) {
   }).addTo(map);
 
   // add stops as markers
-
-  latLongs[id].forEach((latLong) => L.marker(latLong).addTo(map));
+  // add popup of the station name
+  mapInfo[id].latLongs.forEach((latLong, i) =>
+    L.marker(latLong).bindPopup(mapInfo[id].stationNames[i]).addTo(map)
+  );
 
   // create a line between the markers
-  let polyline = L.polyline(latLongs[id], {
+  let polyline = L.polyline(mapInfo[id].latLongs, {
     color: 'blue',
+    snakingSpeed: 200,
   }).addTo(map);
-
-  // L.marker().remove();
 
   // zoom the map to the polyline
   map.fitBounds(polyline.getBounds());
