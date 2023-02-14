@@ -315,6 +315,13 @@ document
     const summary = e.target.closest('.summary');
     // check if clicked target is inside an element with a class 'summary'
     if (summary) {
+      const summaries = document.querySelectorAll('.summary');
+      // remove active class on every summary items
+      summaries.forEach((summary) => summary.classList.remove('active'));
+
+      // make clicked summary active
+      summary.classList.add('active');
+
       const details = document.querySelectorAll('.detail');
 
       // hide every detail
