@@ -47,6 +47,7 @@ let mapInfo = [];
 
 // Api call -> get connections with 2 parameters: from (station) and to (station)
 async function getConnections(from, to) {
+  mapInfo = [];
   try {
     const {
       data: { connection },
