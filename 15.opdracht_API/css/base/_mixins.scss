@@ -7,6 +7,18 @@
   fill: currentColor;
 }
 
+%responsive {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+%flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 // @mixin setcolor($kleur) {
 //   background-color: $kleur;
 //   color: invert($kleur);

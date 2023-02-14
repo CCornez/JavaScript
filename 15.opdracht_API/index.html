@@ -5,18 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- map leaflet -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-      crossorigin=""
     />
-
-    <script
-      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-      crossorigin=""
-    ></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 
     <title>Document</title>
     <script src="./js/index.js" type="module"></script>
@@ -24,10 +18,13 @@
   </head>
   <body>
     <main>
+      <h2>Choose your destination</h2>
       <form action="">
-        <select name="stationFrom" id="stationFrom"></select>
-        <p>➡</p>
-        <select name="stationTo" id="stationTo"></select>
+        <div class="selects">
+          <select name="stationFrom" id="stationFrom"></select>
+          <p>➡</p>
+          <select name="stationTo" id="stationTo"></select>
+        </div>
         <button>search</button>
       </form>
       <h1>result</h1>
